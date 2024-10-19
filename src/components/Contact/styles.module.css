@@ -17,7 +17,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-width: 30%;
+  width: 30%;
   height: 100%;
 }
 
@@ -43,7 +43,7 @@ width: 30%;
 
 .heading {
   width: 80%;
-  font-size: 1.75rem;
+  font-size: 3rem;
   margin: 1rem 0;
   font-weight: 600;
   text-align: left;
@@ -72,7 +72,9 @@ width: 30%;
 .form select {
   padding: 1rem;
   border: 1px solid #ccc;
+  cursor: url("/cursor.svg"), auto;
   border-radius: 1rem;
+  font-size: 0.8rem;
 }
 
 .form input[type="submit"] {
@@ -82,7 +84,7 @@ width: 30%;
   color: #fff;
   background-color: var(--orange);
   border: none;
-  cursor: pointer;
+  cursor: url("/cursor.svg"), auto;
 }
 
 .options {
@@ -95,5 +97,37 @@ width: 30%;
   padding: 0.5rem 1rem;
   background-color: var(--blue);
   color: white;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
   border-radius: 1rem;
+}
+
+.gifstyling {
+  height: 30rem;
+  width: 30rem;
+}
+
+@media (max-width: 768px) {
+  .imgContainer,
+  .textContainer {
+    display: none;
+  }
+
+  .container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 0;
+  }
+
+  .form{
+    width: 100%;
+    margin: 0rem;
+  }
+
+  .heading{
+    font-size: 2rem;
+  }
 }

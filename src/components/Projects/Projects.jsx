@@ -1,16 +1,34 @@
+import { works } from "./data";
 import Card from "./Project Card/Card";
 import styles from "./styles.module.css";
 
 const Projects = () => {
+  let odd = [];
+  let even = [];
+  works?.map((work, index) => {
+    if (index % 2 == 0) {
+      even.push(work);
+    } else {
+      odd.push(work);
+    }
+  });
+
   return (
     <div className={styles.container}>
       <p>Our Work</p>
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <Card />
-      <button className={styles.btn}>View All</button>
+      <div className={styles.line}></div>
+      <div className={styles.cards}>
+        <div className={styles.evenContainer}>
+          {even.map((work, i) => (
+            <Card work={work} i={i} key={i} />
+          ))}
+        </div>
+        <div className={styles.oddContainer}>
+          {odd.map((work, i) => (
+            <Card work={work} i={i + works.length / 2} key={i} />
+          ))}
+        </div>
+      </div>
     </div>
   );
 };

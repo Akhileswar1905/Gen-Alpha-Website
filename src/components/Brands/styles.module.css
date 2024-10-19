@@ -6,7 +6,6 @@
   flex-wrap: wrap;
   margin-top: 20px;
   padding: 3rem;
-  border: #ccc 1px solid;
 }
 
 .header {
@@ -37,10 +36,10 @@
 
 .brands {
   display: flex;
-  gap: 2rem;
+  gap: 8rem;
   position: relative;
   margin: 5rem 0;
-  height: 100px;
+  height: 200px;
   width: 85%;
   overflow: hidden;
 }
@@ -52,6 +51,7 @@
   cursor: pointer;
   top: 0;
   left: 100%;
+  padding: 0 2rem;
   animation-name: move;
   animation-duration: 15s;
   animation-timing-function: linear;
@@ -59,32 +59,20 @@
 }
 
 .brand:nth-child(1) {
-  animation-delay: calc(15s / 6 * (6 - 1) * -1);
+  animation-delay: calc(15s / 3 * (3 - 1) * -1);
 }
 
 .brand:nth-child(2) {
-  animation-delay: calc(15s / 6 * (6 - 2) * -1);
+  animation-delay: calc(15s / 3 * (3 - 2) * -1);
 }
 
 .brand:nth-child(3) {
-  animation-delay: calc(15s / 6 * (6 - 3) * -1);
-}
-
-.brand:nth-child(4) {
-  animation-delay: calc(15s / 6 * (6 - 4) * -1);
-}
-
-.brand:nth-child(5) {
-  animation-delay: calc(15s / 6 * (6 - 5) * -1);
-}
-
-.brand:nth-child(6) {
-  animation-delay: calc(15s / 6 * (6 - 6) * -1);
+  animation-delay: calc(15s / 3 * (3 - 3) * -1);
 }
 
 .brand img {
-  width: 100px;
-  height: 100px;
+  width: 200px;
+  height: 200px;
   object-fit: contain;
 }
 
@@ -108,28 +96,9 @@
 
 @media (max-width: 768px) {
   .container {
-    height: 80vh;
-    margin: 4rem 0;
-  }
-  .container h1 {
-    font-size: 2rem;
-    text-align: center;
-  }
-  .container > p {
-    font-size: 1.2rem;
-  }
-  .brands {
-    margin: 3rem 0;
-  }
-  .brand {
-    animation-duration: 10s;
-  }
-}
-
-@media (max-width: 425px) {
-  .container {
-    height: 70vh;
-    margin: 3rem 0;
+    height: 100%;
+    margin: 0rem;
+    padding: 1.5rem;
   }
   .container h1 {
     font-size: 1.5rem;
@@ -140,9 +109,14 @@
     margin-bottom: 1rem;
   }
   .brands {
-    margin: 2rem 0;
+    margin: 1rem 0;
   }
   .brand {
-    animation-duration: 10s;
+    animation-duration: 15s;
+  }
+  .brand img {
+    width: 6rem;
+    height: 10rem;
+    margin: 0 5rem;
   }
 }

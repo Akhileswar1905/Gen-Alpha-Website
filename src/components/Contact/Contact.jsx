@@ -1,10 +1,13 @@
 "use client";
 
+import contact_gif from "../../../public/contact_gif.json";
 import Image from "next/image";
 import styles from "./styles.module.css";
 import { MotionDiv } from "../motionComponents/motionComponents";
 import { useRef, useState } from "react";
 import emailjs from "@emailjs/browser";
+import Multiselect from "multiselect-react-dropdown";
+import Lottie from "lottie-react";
 
 const stagger = {
   animate: {
@@ -27,27 +30,37 @@ const popup = {
   },
 };
 
-const Contact = () => {
+const Contact = ( {contactRef} ) => {
+  const [options, setOptions] = useState([
+    "Content & Copywriting",
+    "Graphic Design, Iconography & Illustrations",
+    "Video Editing & Animation",
+    "Film Production, AVs & Product Photography",
+    "Brand Identity, Brand Guide & Brand Story",
+    "Custom Web Development",
+    "Web Personalization",
+    "UI/UX Design",
+    "CRM & ERP Solutions",
+    "E-Commerce Solutions",
+    "AR/VR",
+    "Media Buying",
+    "Media Planning",
+    "Performance Marketing",
+    "Affiliate Marketing",
+    "SEO",
+    "Social Media Marketing",
+  ]);
   const [services, setService] = useState([]);
   const [submitted, setSubmitted] = useState(false);
   const form = useRef();
 
   const handleSelect = (e) => {
-    const selectedService = e.target.value;
-    if (selectedService && !services.includes(selectedService)) {
-      setService([...services, selectedService]);
-    }
+    setService(e);
   };
 
   const sendEmail = (e) => {
     e.preventDefault();
-
-    console.log("Before");
-    console.log(form.current);
     form.current.services_list.value = services.join(", ");
-    console.log("After");
-    console.log(form.current);
-
     emailjs
       .sendForm(
         process.env.NEXT_PUBLIC_SERVICE_ID,
@@ -60,7 +73,7 @@ const Contact = () => {
           console.log("SUCCESS!");
           e.target.reset();
           setService([]);
-          setSubmitted(true);
+          setSubmitted(true); 
         },
         (error) => {
           console.log("FAILED...", error.text);
@@ -74,6 +87,7 @@ const Contact = () => {
       initial="hidden"
       whileInView="animate"
       className={styles.container}
+      ref={contactRef}
     >
       <MotionDiv
         variants={popup}
@@ -81,7 +95,10 @@ const Contact = () => {
         whileInView="visible"
         className={styles.imgContainer}
       >
-        <Image src={"/contact1.gif"} alt="" width={500} height={500} />
+        {/* <Image src={contact_gif} alt="" width={500} height={500} /> */}
+        <Lottie className={styles.gifstyling}
+        animationData={contact_gif}
+        />
       </MotionDiv>
       <MotionDiv
         variants={popup}
@@ -106,29 +123,20 @@ const Contact = () => {
           <input type="number" placeholder="Phone Number" name="phone_number" />
           <input type="text" placeholder="Your Brand" name="brand" />
 
-          <select
-            name="service_select"
-            id="services"
-            onChange={handleSelect}
-            required
-          >
-            <option value="select_services" disabled selected>
-              Select Services
-            </option>
-            <option value="Branding">Branding</option>
-            <option value="Design">Design</option>
-            <option value="Technology">Technology</option>
-            <option value="Marketing">Marketing</option>
-          </select>
-
-          {/* Displaying selected services */}
-          {services.length > 0 && (
-            <div className={styles.options}>
-              {services.map((service, index) => (
-                <small key={index}>{service}</small>
-              ))}
-            </div>
-          )}
+          <Multiselect
+            options={options}
+            onSelect={handleSelect}
+            onRemove={handleSelect}
+            showCheckbox={true}
+            placeholder="Select Services"
+            isObject={false}
+            style={{
+              searchBox: { borderRadius: "1rem" },
+              multiselectContainer: {
+                width: "100%",
+              },
+            }}
+          />
 
           {/* Hidden input to send selected services */}
           <input type="hidden" name="services_list" />
